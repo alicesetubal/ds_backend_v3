@@ -5,7 +5,7 @@ import PyPDF2
 import docx2txt
 #import os
 
-
+ 
 def check_password():
     """Returns `True` if the user had the correct password."""
 
