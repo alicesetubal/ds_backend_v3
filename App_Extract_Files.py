@@ -3,6 +3,11 @@ import streamlit as st
 import PyPDF2 
 # import io
 import docx2txt
+#import os
+
+#Para aceder aos secrets através da aplicação
+st.write("Username:", st.secrets["username"])
+st.write("Password:", st.secrets["password"])
 
 #Criei classes para deixar o código mais legível e organizado
 class File_Extractor:
