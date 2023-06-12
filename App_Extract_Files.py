@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import PyPDF2 
-import io
+# import io
 import docx2txt
 
 #Criei classes para deixar o código mais legível e organizado
