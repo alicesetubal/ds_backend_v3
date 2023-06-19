@@ -62,8 +62,8 @@ if check_password():
       elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
             texto = file_extract_obj.extract_text_docx()
           
-      else:
-       st.stop() 
+else:
+ st.stop() 
        
-    st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
-    st.code(texto)
+st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
+st.code(texto)
