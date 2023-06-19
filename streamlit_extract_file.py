@@ -37,8 +37,8 @@ def check_password():
     
 
 
-def check_password():
- if check_password():
+
+if check_password():
     st.header("Welcome to Extract File :smile:")
     arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
