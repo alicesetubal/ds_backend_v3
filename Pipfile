@@ -7,6 +7,10 @@ name = "pypi"
 docx2txt = "*"
 streamlit = "*"
 pypdf2 = "*"
+flask = "*"
+flask-wtf = "*"
+wtforms = "*"
+textract = "*"
 
 [dev-packages]
 

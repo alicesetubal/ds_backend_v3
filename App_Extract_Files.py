@@ -1,9 +1,8 @@
 import pandas as pd
 import streamlit as st
-import PyPDF2 
-# import io
-import docx2txt
-#import os
+#import PyPDF2
+#import docx2txt
+from class_file_extractor import file_extractor
 
  
 def check_password():
@@ -34,77 +33,41 @@ def check_password():
         # Password correct.
         return True
 
-    
 
-#Criei classes para deixar o código mais legível e organizado
-class File_Extractor:
-    def __init__(self, file):
-        self.file = file
-
-#Primeiro tenho que definir as funções para extrair o texto dos arquivos
-    def extract_text_csv(self):
-     data_frame = pd.read_csv(self.file)
-     texto = data_frame.to_string(index=False)
-     return texto
-
-    def extract_text_xlsx(self):
-      data_frame = pd.read_excel(self.file)
-      texto = data_frame.to_string(index=False)
-      return texto
-
-    
-    def extract_text_pdf(self):
-      reader= PyPDF2.PdfReader(self.file)
-      numPages = len(reader.pages)
-      texto= ''
-      for page in range(numPages):
-        texto += reader.pages[page].extract_text()
-      return texto
-        
-
-    def extract_text_txt(self):
-      texto = self.file.getvalue().decode()
-      return texto
-
-    def extract_text_docx(self):
-      texto = docx2txt.process(self.file)
-      return texto
-    
     
 
 
 if check_password():
-  st.header("Welcome to Extract File :smile:") 
-  #Local onde o utilizador irá adicionar o arquivo
-  arquivo = st.file_uploader('Insira seu arquivo:' , type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
-
+    st.header("Welcome to Extract File :smile:") 
+    arquivo = st.file_uploader('Insira seu arquivo:' , type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])#Local onde o utilizador irá adicionar o arquivo
+    file_extractor_obj = file_extractor() #criado uma instância para a classe.
 
   #Aqui foi definido cada MIME para o streamlit reconhecer o tipo de arquivo
   #Utilizei o if para verificar qual tipo de arquivo
-  if arquivo is not None:
-      
-      file_extractor = File_Extractor(arquivo)
-      
+    if arquivo is not None:
+      file_type = arquivo.type
+      #file_extractor = file_extractor(arquivo)
+      extracted_text = None
       
       if arquivo.type == 'text/csv':
           
-          texto = file_extractor.extract_text_csv()
+          texto = file_extractor.extract_text_csv(arquivo)
       
       if arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            texto = file_extractor.extract_text_xlsx()
+            texto = file_extractor.extract_text_xlsx(arquivo)
       
       elif arquivo.type == 'application/pdf':
-            texto = file_extractor.extract_text_pdf()
+            texto = file_extractor.extract_text_pdf(arquivo)
             
       elif arquivo.type == 'text/plain':
-            texto = file_extractor.extract_text_txt()
+            texto = file_extractor.extract_text_txt(arquivo)
             
       elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-          texto = file_extractor.extract_text_docx()
+          texto = file_extractor.extract_text_docx(arquivo)
           
-  else:
+      else:
     
-    st.stop()
-  #Aqui apresenta o texto extraído no Streamlit
-  st.header("O texto extraido foi:")
-  st.code(texto)
+       #st.stop()
+       if extracted_text is not None:
+           st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
+           st.code(extracted_text)

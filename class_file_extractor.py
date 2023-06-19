@@ -1,10 +1,19 @@
 import pandas as pd
 import PyPDF2
 import docx2txt
+
+
+
+
+
 # Criei classes para deixar o código mais legível e organizado
-class File_Extractor:
+class file_extractor:
     def __init__(self, file):
         self.file = file
+        
+        
+        
+        
         
 #Primeiro tenho que definir as funções para extrair o texto dos arquivos
     def extract_text_csv(self):
