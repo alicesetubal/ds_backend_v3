@@ -56,7 +56,7 @@ if check_password():
             texto = FileExtrator.extract_text_xlsx(arquivo)
       
       elif arquivo.type == 'application/pdf':
-            extracted_text = FileExtrator.extract_text_pdf(arquivo)
+            texto = FileExtrator.extract_text_pdf(arquivo)
             
       elif arquivo.type == 'text/plain':
             texto = FileExtrator.extract_text_txt(arquivo)
