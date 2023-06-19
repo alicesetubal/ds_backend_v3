@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 #import PyPDF2
 #import docx2txt
-from class_file_extractor import file_extractor
+from class_file_extractor import FileExtrator
 
  
 def check_password():
@@ -40,7 +40,7 @@ def check_password():
 if check_password():
     st.header("Welcome to Extract File :smile:") 
     arquivo = st.file_uploader('Insira seu arquivo:' , type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])#Local onde o utilizador irá adicionar o arquivo
-    #file_extractor_obj = file_extractor() #criado uma instância para a classe.
+    file_extractor_obj = FileExtrator() #criado uma instância para a classe.
 
  
     if arquivo is not None:
@@ -50,19 +50,19 @@ if check_password():
       
       if arquivo.type == 'text/csv':
           
-          texto = file_extractor.extract_text_csv(arquivo)
+          texto = FileExtrator.extract_text_csv(arquivo)
       
       if arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            texto = file_extractor.extract_text_xlsx(arquivo)
+            texto = FileExtrator.extract_text_xlsx(arquivo)
       
       elif arquivo.type == 'application/pdf':
-            texto = file_extractor.extract_text_pdf(arquivo)
+            texto = FileExtrator.extract_text_pdf(arquivo)
             
       elif arquivo.type == 'text/plain':
-            texto = file_extractor.extract_text_txt(arquivo)
+            texto = FileExtrator.extract_text_txt(arquivo)
             
       elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-          texto = file_extractor.extract_text_docx(arquivo)
+          texto = FileExtrator.extract_text_docx(arquivo)
           
       else:
     

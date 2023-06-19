@@ -1,7 +1,7 @@
 import os
 #import urllib.request
-from app import app
-from flask import Flask, request, redirect, jsonify, flash
+from api_confg import app
+from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import textract 
 
@@ -11,7 +11,7 @@ def allowed_file(filename):
     file_allowed = ('.' in filename) and (filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS)
     return file_allowed
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET'])
 def upload_file():
     # check if the post request has the file part
     if 'file_to_process' not in request.files:
