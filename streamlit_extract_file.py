@@ -37,20 +37,18 @@ def check_password():
     
 
 
-if check_password():
-    st.header("Welcome to Extract File :smile:") 
-    arquivo = st.file_uploader('Insira seu arquivo:' , type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])#Local onde o utilizador irá adicionar o arquivo
+def check_password():
+ if check_password():
+    st.header("Welcome to Extract File :smile:")
+    arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
-
- 
     if arquivo is not None:
         file_extract_obj = FileExtrator(arquivo)
       
         if arquivo.type == 'text/csv':
-          
-           texto = file_extract_obj.extract_text_csv()
+            texto = file_extract_obj.extract_text_csv()
       
-        if arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        elif arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
             texto = file_extract_obj.extract_text_xlsx()
       
         elif arquivo.type == 'application/pdf':
@@ -61,8 +59,10 @@ if check_password():
             
         elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
             texto = file_extract_obj.extract_text_docx()
-else:
- st.stop() 
- 
-st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
-st.code(texto)
+        
+        else:
+            st.error("Tipo de arquivo não suportado.")
+            st.stop()
+            
+        st.header("O texto extraído foi:")
+        st.code(texto)
