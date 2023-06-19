@@ -40,7 +40,7 @@ def check_password():
 if check_password():
     st.header("Welcome to Extract File :smile:") 
     arquivo = st.file_uploader('Insira seu arquivo:' , type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])#Local onde o utilizador irá adicionar o arquivo
-    file_extractor_obj = FileExtrator() #criado uma instância para a classe.
+    #file_extractor_obj = FileExtrator() #criado uma instância para a classe.
 
  
     if arquivo is not None:
