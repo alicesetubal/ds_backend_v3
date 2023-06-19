@@ -11,6 +11,7 @@ flask = "*"
 flask-wtf = "*"
 wtforms = "*"
 textract = "*"
+openpyxl = "*"
 
 [dev-packages]
 
