@@ -44,28 +44,27 @@ if check_password():
 
  
     if arquivo is not None:
-      file_type = arquivo.type
-      extracted_text = None
+      file_extract_obj = FileExtrator(arquivo)
       
       if arquivo.type == 'text/csv':
           
-           texto = FileExtrator.extract_text_csv(arquivo)
+           texto = file_extract_obj.extract_text_csv()
       
       if arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            texto = FileExtrator.extract_text_xlsx(arquivo)
+            texto = file_extract_obj.extract_text_xlsx()
       
       elif arquivo.type == 'application/pdf':
-            texto = FileExtrator.extract_text_pdf(arquivo)
+            texto = file_extract_obj.extract_text_pdf()
             
       elif arquivo.type == 'text/plain':
-            texto = FileExtrator.extract_text_txt(arquivo)
+            texto = file_extract_obj.extract_text_txt()
             
       elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-            texto = FileExtrator.extract_text_docx(arquivo)
+            texto = file_extract_obj.extract_text_docx()
           
       else:
     
-       #st.stop()
-       if extracted_text is not None:
-           st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
-           st.code(texto)
+        st.stop() 
+       
+    st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
+    st.code(texto)
