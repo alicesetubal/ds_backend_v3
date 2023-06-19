@@ -50,13 +50,13 @@ if check_password():
       
       if arquivo.type == 'text/csv':
           
-          texto = FileExtrator.extract_text_csv(arquivo)
+           texto = FileExtrator.extract_text_csv(arquivo)
       
       if arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
             texto = FileExtrator.extract_text_xlsx(arquivo)
       
       elif arquivo.type == 'application/pdf':
-            texto = FileExtrator.extract_text_pdf(arquivo)
+            extracted_text = FileExtrator.extract_text_pdf(arquivo)
             
       elif arquivo.type == 'text/plain':
             texto = FileExtrator.extract_text_txt(arquivo)
