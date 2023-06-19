@@ -63,8 +63,7 @@ if check_password():
             texto = file_extract_obj.extract_text_docx()
           
       else:
-    
-        st.stop() 
+       st.stop() 
        
     st.header("O texto extraido foi:")#Aqui apresenta o texto extraído no Streamlit
     st.code(texto)
