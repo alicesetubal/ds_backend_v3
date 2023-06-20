@@ -1,7 +1,5 @@
 import pandas as pd
 import streamlit as st
-#import PyPDF2
-#import docx2txt
 from class_file_extractor import FileExtrator
 
  

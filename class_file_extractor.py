@@ -6,7 +6,7 @@ import docx2txt
 
 
 
-# Criei classes para deixar o código mais legível e organizado
+"""Criei classes para deixar o código mais legível e organizado"""
 class FileExtrator:
     def __init__(self, file):
         self.file = file
