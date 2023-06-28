@@ -1,8 +1,8 @@
-import pandas as pd
 import streamlit as st
-from class_file_extractor import FileExtrator
+import textract
+import os
 
- 
+
 def check_password():
     """Returns `True` if the user had the correct password."""
 
@@ -37,26 +37,30 @@ def check_password():
 
 
 if check_password():
-    st.header("Welcome to Extract File :smile:")
-    arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
+   st.header("Welcome to Extract File :smile:")
+   arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
-    if arquivo is not None:
-        file_extract_obj = FileExtrator(arquivo)
+   if arquivo is not None:
+        with open(os.path.join("temp", arquivo.name), "wb") as f:
+            f.write(arquivo.getbuffer())
+        
+        filename = os.path.join("temp", arquivo.name)
+        file_extract_obj = textract.process(filename)
       
         if arquivo.type == 'text/csv':
-            texto = file_extract_obj.extract_text_csv()
+            texto = file_extract_obj.decode('utf-8')
       
         elif arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            texto = file_extract_obj.extract_text_xlsx()
+            texto = file_extract_obj.decode('utf-8')
       
         elif arquivo.type == 'application/pdf':
-            texto = file_extract_obj.extract_text_pdf()
+            texto = file_extract_obj.decode('utf-8')
             
         elif arquivo.type == 'text/plain':
-            texto = file_extract_obj.extract_text_txt()
+            texto = file_extract_obj.decode('utf-8')
             
         elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-            texto = file_extract_obj.extract_text_docx()
+            texto = file_extract_obj.decode('utf-8')
         
         else:
             st.error("Tipo de arquivo não suportado.")
@@ -64,3 +68,5 @@ if check_password():
             
         st.header("O texto extraído foi:")
         st.code(texto)
+        
+        os.remove(filename)
